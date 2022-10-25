@@ -7,8 +7,9 @@ type User {
     email:String!
 }
 type AuthData {
-    data:String!
+    data:String
     authenticated:Boolean
+    message:String
 }
 type Query {
     login(email:String!,password:String!):AuthData!

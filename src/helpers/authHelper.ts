@@ -26,18 +26,30 @@ export class AuthHelper {
 
         //validate email
         if (!isEmailValidated) {
-            return { data: "Provide valid email", authenticated: false };
+            console.log('Invalid email');
+            
+            return { message: "Provide valid email", authenticated: false,data:''};
 
         }
         //fetching user from hasura
         let res:UserRes= await dbHelper.fetchUser(email);
         //check for errors
         if(res.err != ''){
-            throw new Error('User does not exist!');
+            // throw new Error('User does not exist!');
+            return {
+                message:"User does not exist!",
+                data:'',
+                authenticated:false
+            }   
         }
         const isEqual = await bcrypt.compare(password, res.user.password);
         if (!isEqual) {
-            throw new Error('Password is incorrect!');            
+            // throw new Error('Password is incorrect!');      
+            return {
+                message:"Password is incorrect!",
+                data:"",
+                authenticated:false
+            }      
         }
         const payload = {
             'id':res.user.id,
@@ -54,7 +66,7 @@ export class AuthHelper {
             return { data: token, authenticated: true };
 
         } else {
-            return { data: "Error", authenticated: false };
+            return { message: "Error", authenticated: false,data:'' };
 
         }
     }
