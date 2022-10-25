@@ -12,7 +12,8 @@ const PORT = Number(process.env.PORT) || 8080
 
 const server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    introspection:true
 })
 
 startStandaloneServer(server, {
