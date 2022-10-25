@@ -7,8 +7,6 @@ export const resolvers = {
         login:async (_:any,args:Map<string,string>)=>authHelper.login(args),
     },
     Mutation: {
-        signup:async()=>{
-            return null
-        }
+        signup:async(_:any,args:Map<string,string>)=>authHelper.signup(args)
     }
 }

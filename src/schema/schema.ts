@@ -5,6 +5,13 @@ type User {
     id:ID!
     name:String!
     email:String!
+    photoUrl:String!
+}
+input UserIn {
+    name:String!
+    email:String!
+    password:String!
+    photoUrl:String!
 }
 type AuthData {
     data:String
@@ -15,6 +22,6 @@ type Query {
     login(email:String!,password:String!):AuthData!
 }
 type Mutation {
-    signup(name:String!,email:String!,password:String!):User
+    signup(user:UserIn):AuthData
 }
 `;
